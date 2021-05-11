@@ -1,0 +1,9 @@
+<div class="login">
+    <BsForm @model={{this}} @onSubmit={{action this.submit}} as |form|>
+        <form.element @controlType="text" @label="Employee Id" @placeholder="Employee ID" @property="empId" />
+        <form.element @controlType="password" @label="Password" @placeholder="Password" @property="password"/>
+        <p class="error">{{this.error}}</p>
+        <form.submitButton>Login</form.submitButton>
+        <BsButton @onClick={{action this.register}}>Register</BsButton>
+    </BsForm>
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+    <BsButton @onClick={{action this.addNew}} class="add-new">Add new Idea</BsButton>
+    <div class="sort-by">
+        <label for="sortBy">Sort by: </label>
+        <select name="sort" id="sort" onchange={{action this.sort}}>
+            <option value="likes">Vote</option>
+            <option value="createdBy">Created By</option>
+            <option value="createdAt">Created time</option>
+        </select>
+    </div>
+    <BsModalSimple
+    @open={{this.showModal}}
+    @title="New Hackathon Idea"
+    @closeTitle="Cancel"
+    @submitTitle="Submit"
+    @size="lg"
+    @closeButton={{true}}
+    @fade={{true}}
+    @backdrop={{true}}
+    @backdropClose={{true}}
+    @onHidden={{action this.close}}
+    @renderInPlace={{true}}>
+        <BsForm @model={{this}} @onSubmit={{action this.submit}} as |form|>
+            <form.element @controlType="text" @label="Title" @placeholder="Title of Ides" @property="title" />
+            <form.element @controlType="textarea" @label="Description" @placeholder="Detailed Description of idea" @property="description"/>
+            <label for="tag">Tag</label>
+            <select name="tags" id="tags" onchange={{action this.tagSelect}}>
+                {{#each tags as |tag|}}
+                    <option value={{tag.key}}>{{tag.value}}</option>
+                {{/each}}
+            </select>
+            <div class="tags">
+                {{#each this.selectedTags as |tag|}}
+                    <span class="tag">{{tag}} <i class="fa" {{action this.removeTag tag}}>&#x2715;</i></span>
+                {{/each}}
+            </div>
+        </BsForm>
+        <p class="error">{{this.error}}</p>
+    </BsModalSimple>
+    <div class="cards">
+    {{#each this.sortedList as |item|}}
+        <div class="card-data">
+            <span class="title">{{item.title}}</span>
+            <div class="secondary-data">
+                <div class="created-details">
+                    Created by <span class="createdBy">{{item.createdBy}}</span> at
+                    <span class="createdAt">{{dayjs-from-now item.createdAt}}</span>
+                </div>
+                <div class="tags">
+                    {{#each item.tags as |tag|}}
+                        <span class="tag">{{tag}} <i class="fa" {{action this.removeTag tag item}}>&#x2715;</i></span>
+                    {{/each}}
+                </div>
+            </div>
+            <p class="desc">{{item.description}}</p>
+            <span class="like" >
+                <i class="fa" {{action this.likeAction item}}>&#xf087;</i>
+                {{item.likes}}
+            </span>
+        </div>
+    {{/each}}
+    </div>
+</div>
+
