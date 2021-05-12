@@ -68,7 +68,7 @@
     "sass": "^1.32.12"
   },
   "engines": {
-    "node": "10.* || >= 12"
+    "node": ">=12 <12.18.3"
   },
   "ember": {
     "edition": "octane"
