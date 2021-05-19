@@ -2,6 +2,10 @@
 
 Hackathon Idea is a Ember application with firebase as the backend API. Please refer below screen shots for application screenshot folder
 
+## DEMO
+
+http://hackathon.arunkumarvelu.in
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
